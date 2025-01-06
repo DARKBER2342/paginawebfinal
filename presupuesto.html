@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Reparación de Móviles</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../recursos/logo.png" alt="ReparaTuMóvil Logo" style="height:60px; vertical-align:middle;"> ReparaTuMóvil</div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="galeria.html" class="active">Galería</a></li>
+                <li><a href="presupuesto.html">Presupuesto</a></li>
+                <li style="padding-right: 10px;"><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Solicitar Presupuesto</h1>
+        <form id="presupuesto-form">
+            <fieldset>
+                <legend>Datos de Contacto</legend>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" maxlength="15" required>
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" maxlength="40" required>
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" maxlength="9" pattern="\d{9}" required>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>Presupuesto</legend>
+                <label for="producto">Producto:</label>
+                <select id="producto" name="producto">
+                    <option value="pantalla" data-precio="50">Cambio de Pantalla - $50</option>
+                    <option value="bateria" data-precio="30">Cambio de Batería - $30</option>
+                    <option value="limpieza" data-precio="20">Limpieza Interna - $20</option>
+                </select>
+                <label for="plazo">Plazo (días):</label>
+                <input type="number" id="plazo" name="plazo" min="1" max="30" value="7">
+                <h2>menor dias de plazo mayor el descuento</h2>
+                <div class="extras">
+                    <p>Extras:</p>
+                    <label><input type="checkbox" name="extra" value="10"> Protector de Pantalla ($10)</label>
+                    <label><input type="checkbox" name="extra" value="15"> Funda de Protección ($15)</label>
+                    <label><input type="checkbox" name="extra" value="5"> Limpieza Antibacteriana ($5)</label>
+                </div>
+                <p>Total: <output id="presupuesto-final">$0.00</output></p>
+            </fieldset>
+
+            <div class="form-actions">
+                <label><input type="checkbox" id="condiciones" name="condiciones" required> Acepto las condiciones de privacidad</label>
+                <button type="submit">Enviar</button>
+                <button type="reset">Resetear</button>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://es-es.facebook.com/">Facebook</a> |
+            <a href="https://x.com/?mx=2">Twitter</a> |
+            <a href="https://www.instagram.com/">Instagram</a>
+        </div>
+        <p>&copy; 2025 ReparaTuMóvil. Todos los derechos reservados. juan calderon Masterd</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productoSelect = document.getElementById('producto');
+            const extrasCheckboxes = document.querySelectorAll('input[name="extra"]');
+            const plazoInput = document.getElementById('plazo');
+            const totalOutput = document.getElementById('presupuesto-final');
+
+            function calcularPresupuesto() {
+                let total = 0;
+                const productoPrecio = productoSelect.options[productoSelect.selectedIndex]?.dataset?.precio;
+                if (productoPrecio) {
+                    total += parseFloat(productoPrecio);
+                }
+                extrasCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        total += parseFloat(checkbox.value);
+                    }
+                });
+                const plazo = parseInt(plazoInput.value, 10);
+                if (!isNaN(plazo) && plazo <= 5) {
+                    total *= 0.9;
+                }
+                totalOutput.textContent = `$${total.toFixed(2)}`;
+            }
+            productoSelect.addEventListener('change', calcularPresupuesto);
+            extrasCheckboxes.forEach(checkbox => checkbox.addEventListener('change', calcularPresupuesto));
+            plazoInput.addEventListener('input', calcularPresupuesto);
+            calcularPresupuesto();
+        });
+    </script>
+</body>
+</html>
+
