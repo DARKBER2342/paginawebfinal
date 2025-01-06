@@ -1,0 +1,18 @@
+{
+    "noticias": [
+        {
+            "titulo": "Nuevas tecnologías en reparación de móviles",
+            "descripcion":"Explora las innovaciones más avanzadas en la reparación de móviles. Desde herramientas de precisión hasta técnicas de última generación, todo para garantizar un servicio eficiente y de alta calidad."
+
+
+        },
+        {
+            "titulo": "Promoción especial este mes",
+            "descripcion": "¡Este mes es tu oportunidad! Disfruta de un 20% de descuento en el cambio de pantallas y devuelve a tu móvil el aspecto y funcionamiento que merece. Válido solo durante enero."
+        },
+        {
+            "titulo": "Consejos para el cuidado de tu móvil",
+            "descripcion": "Descubre cómo prolongar la vida útil de tu móvil con estos consejos prácticos y sencillos. Mantén tu dispositivo protegido, limpio y funcionando como el primer día."
+        }
+    ]
+}
